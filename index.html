@@ -10,7 +10,8 @@
     <style>
         body { 
             font-family: 'Lexend', sans-serif;
-            background: linear-gradient(135deg, #3e2723 0%, #1a0f0d 100%);
+            /* Novo fundo Marrom Premium - Radial para profundidade */
+            background: radial-gradient(circle at center, #5d4037 0%, #3e2723 60%, #1a0f0d 100%);
             overflow: hidden;
             position: relative;
             margin: 0;
@@ -31,7 +32,7 @@
 
         .floating-heart {
             position: absolute;
-            color: rgba(176, 137, 104, 0.4); /* Cor que combina com a paleta */
+            color: rgba(176, 137, 104, 0.4); /* Bronze suave */
             font-size: 20px;
             animation: floatUp 6s linear infinite;
             bottom: -10%;
@@ -48,7 +49,7 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 10; /* Aumentado para ficar acima dos corações */
+            z-index: 10;
             pointer-events: none;
         }
 
@@ -56,7 +57,8 @@
             position: absolute;
             background: white;
             padding: 8px 8px 25px 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            /* Sombra mais definida para efeito flutuante */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
             border-radius: 2px;
             opacity: 0;
             transform: scale(0.5);
@@ -68,7 +70,7 @@
         .polaroid:hover { 
             z-index: 100 !important; 
             transform: scale(1.15) rotate(0deg) translateY(-10px) !important;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
         }
 
         .polaroid img {
@@ -90,9 +92,12 @@
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.94);
+            background: rgba(255, 255, 255, 0.96); /* Ligeiramente mais opaco */
             backdrop-filter: blur(15px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            /* Borda Bronze Sutil */
+            border: 1px solid rgba(176, 137, 104, 0.3);
+            /* Sombra Premium */
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
             z-index: 50;
             position: relative;
         }
@@ -133,7 +138,7 @@
             <span>Para: Pincipinha</span>
         </div>
         
-        <h1 id="titulo" class="w-full text-2xl font-extrabold text-[#3e2723] mb-6 text-left min-h-[1.5em]"></h1>
+        <h1 id="titulo" class="w-full text-2xl font-extrabold text-[#3e2723] mb-6 text-left min-h-[1.5em] text-shadow-sm"></h1>
         
         <div class="w-full max-h-[40vh] overflow-y-auto custom-scroll pr-3 text-left">
             <p id="mensagem" class="text-[#5d4037] text-md leading-relaxed mb-8 font-medium"></p>
@@ -150,72 +155,60 @@
             </div>
         </div>
         
-        <button id="btn-amor" onclick="maisAmor()" class="hidden mt-8 px-8 py-3 bg-[#8d6e63] text-white font-bold rounded-full shadow-lg hover:bg-[#5d4037] hover:scale-110 transition-all duration-300">
-            Eu também te amo! ❤️
+        <button id="btn-amor" onclick="maisAmorEWhats()" class="hidden mt-8 px-10 py-3 bg-[#8d6e63] text-white font-bold rounded-full shadow-lg hover:bg-[#5d4037] hover:scale-110 transition-all duration-300 flex items-center gap-2">
+            <span>Eu também te amo!</span> ❤️
         </button>
         
         <div id="coracao-pulsante" class="mt-8 text-2xl animate-pulse">🤎</div>
     </div>
 
     <script>
+        // Dados originais mantidos
         const fotosIDs = ["1SpN9vAOa0uYThYKtskgdvvRylqZHJA71","16AGp4HrLkpel4s0Uvl3LYozfd_ymAxmN","1dAxnDS6nNeUatVYJq5NzSAUAccR5mLgp","1gkAjdg34b3eUL56jHPiLUomf3vjgo0jJ","1MP5B3bOpKoa65J2gBtL0-hhqlkWzcNk9","1amiyTnXW-uD9rV6VYHaetP56Lr0Y8cH9","1RQF3ZFnfUljRQY4POWLcdaRqaFqlsr48","1FiiU1uVPkcMHJq6XNjIgxTdyypuJ3D5C","1u1huVQWL16daCHEh-dKUHL_YDvWznCKE","1KKl5g5zJ3xwNuwaW66l4tGD_R0Hz0fEN","1uskomoeWqoYjqP8d1QzN1GohSEpIxWlP","1QrjWFUu5AWZ8TQQNFYb14Zw6EsICqJKF","1hseL4E1zcQ0Ott7_gcHlpeYEqDTFNtrL","1kS2KnwNnu6ayxWQPRReq_fgEykPMv6TI","19qx8UPaNOuJZUeEVM9sj-geGd3KL3eS0"];
-        
         const linkMusica = 'https://files.catbox.moe/ffhpwy.mp3'; 
         const textoTitulo = "Oi, Pincipinha!";
         const textoPrincipal = "Pensei em escrever uma carta, mas nada melhor do que fazer uma digitalmente, né? KKKKKK!\n\nOlha, princesa, eu agradeço a Deus, de verdade, pela sua vida. Por todo esse tempo em que tenho aprendido quem você é e a te amar mais e mais a cada dia... Não é nada diferente do que você já escuta de mim, mas espero que estes presentes tenham tocado esse teu coração lindo.\n\nApesar do estresse, você é linda no falar, no olhar, no agir, e vai ficar mais linda ainda ao longo dos anos em que, em nome de Jesus, estaremos juntos!\n\nVocê é preciosa e eu te amo INFINITO!";
 
+        // Configuração de áudio original mantida
         const audioPlayer = new Audio();
         audioPlayer.loop = true;
         audioPlayer.preload = 'auto';
-        audioPlayer.volume = 0; // Começa sem som para o fade-in
+        audioPlayer.volume = 0; // Para fade-in
 
         function preloadAssets() {
             fotosIDs.forEach(id => {
                 const img = new Image();
                 img.src = `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
             });
-
             audioPlayer.src = linkMusica;
             audioPlayer.load();
-            
             audioPlayer.addEventListener('canplaythrough', () => {
                 const loader = document.getElementById('loader');
                 if(loader) loader.innerText = "Tudo pronto! ✨";
             }, { once: true });
-
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 if(loader) loader.style.opacity = '0';
             }, 4000);
         }
 
-        // Função para criar os corações flutuantes no fundo
         function criarCoracaoFlutuante() {
             const container = document.getElementById('hearts-container');
             const heart = document.createElement('div');
             heart.innerHTML = '❤️';
             heart.className = 'floating-heart';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 4) + 's'; // Entre 4s e 7s
-            heart.style.fontSize = (Math.random() * 15 + 10) + 'px'; // Tamanhos diferentes
-            
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
             container.appendChild(heart);
-
-            // Remove o coração depois que ele sobe para não pesar o navegador
-            setTimeout(() => {
-                heart.remove();
-            }, 7000);
+            setTimeout(() => { heart.remove(); }, 7000);
         }
 
         function fadeInAudio() {
             let vol = 0;
             const interval = setInterval(() => {
-                if (vol < 0.8) { // Volume máximo será 80%
-                    vol += 0.05;
-                    audioPlayer.volume = vol;
-                } else {
-                    clearInterval(interval);
-                }
+                if (vol < 0.8) {vol += 0.05; audioPlayer.volume = vol;} 
+                else {clearInterval(interval);}
             }, 200);
         }
 
@@ -223,76 +216,63 @@
             const container = document.getElementById('polaroid-container');
             const cols = 4, rows = 4;
             const cellW = 100 / cols, cellH = 100 / rows;
-
             fotosIDs.forEach((id, index) => {
                 const div = document.createElement('div');
                 div.className = 'polaroid';
                 const img = document.createElement('img');
                 img.src = `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
                 div.appendChild(img);
-                
                 const col = index % cols;
                 const row = Math.floor(index / cols);
                 const jitterX = (Math.random() * 15 - 7.5); 
                 const jitterY = (Math.random() * 15 - 7.5);
-
                 div.style.left = `${(col * cellW) + 5 + jitterX}%`;
                 div.style.top = `${(row * cellH) + 5 + jitterY}%`;
                 div.style.zIndex = index + 10;
                 div.style.setProperty('--rotation', (Math.random() * 40 - 20) + "deg");
                 div.style.setProperty('--float-speed', (Math.random() * 2 + 3) + "s");
                 div.style.animationDelay = (Math.random() * 2) + "s";
-
                 container.appendChild(div);
                 setTimeout(() => div.classList.add('aparecer'), index * 80);
             });
         }
 
-        function maisAmor() {
-            // Estoura confetes focados em vermelho e rosa
+        // Nova função do botão: Confete + WhatsApp
+        function maisAmorEWhats() {
+            // Estoura confetes focados em vermelho e bronze
             confetti({
                 particleCount: 100,
                 spread: 80,
                 origin: { y: 0.6 },
-                colors: ['#ff0000', '#ff69b4', '#ffffff']
+                colors: ['#ff0000', '#ff69b4', '#3e2723', '#b08968']
             });
+
+            // Abre o WhatsApp após um pequeno delay para ver o confete
+            setTimeout(() => {
+                const numeroSeu = "5584992284895"; // Seu número formatado
+                const mensagemSua = "Amei o presente! Eu também te amo infinitamente! 🤎";
+                const urlWa = `https://wa.me/${numeroSeu}?text=${encodeURIComponent(mensagemSua)}`;
+                window.open(urlWa, '_blank');
+            }, 500); 
         }
 
         function abrirSurpresa() {
-            audioPlayer.play().then(() => {
-                fadeInAudio(); // Chama o fade-in se o play funcionar
-            }).catch(() => {
-                setTimeout(() => {
-                    audioPlayer.play();
-                    fadeInAudio();
-                }, 100);
+            audioPlayer.play().then(() => {fadeInAudio();}).catch(() => {
+                setTimeout(() => {audioPlayer.play(); fadeInAudio();}, 100);
             });
-
-            // Inicia os corações flutuantes no fundo
             setInterval(criarCoracaoFlutuante, 400);
-
-            confetti({ 
-                particleCount: 150, 
-                spread: 70, 
-                origin: { y: 0.6 }, 
-                colors: ['#3e2723', '#b08968', '#ffffff', '#e6ccb2'] 
-            });
-
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#3e2723', '#b08968', '#ffffff', '#e6ccb2'] });
             criarPolaroids();
-
             document.getElementById('setup').classList.add('scale-0', 'opacity-0');
             setTimeout(() => {
                 document.getElementById('setup').style.display = 'none';
                 const carta = document.getElementById('carta');
                 carta.classList.remove('hidden');
-                
                 setTimeout(() => {
                     carta.classList.add('opacity-100', 'translate-y-0');
                     digitar('titulo', textoTitulo, 100, () => {
                         digitar('mensagem', textoPrincipal, 40, () => {
                             document.getElementById('versiculos').classList.remove('hidden');
-                            
-                            // Mostra o botão e esconde o coração pulsante estático
                             setTimeout(() => {
                                 document.getElementById('coracao-pulsante').classList.add('hidden');
                                 document.getElementById('btn-amor').classList.remove('hidden');
@@ -316,7 +296,6 @@
             }
             step();
         }
-
         preloadAssets();
     </script>
 </body>
